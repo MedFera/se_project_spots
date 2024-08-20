@@ -1,21 +1,19 @@
-# Project 3: Spots
+Adaptive Web Design and Working with Layouts - Sprint 3
+Project Name: Spots - Interactive Social Media Web Application
+Project Description
 
-### Overview  
+Features:
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project-%E2%80%94-Spots?type=design&node-id=2%3A60&mode=design&t=afgNFybdorZO6cQo-1)
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+- Responsive Design: The web application is designed to be fully responsive, with layouts that adapt to various screen sizes (mobile, tablet, and desktop).
+- Photo Cards: Users can view photo cards in a grid layout that adjusts based on the screen size.
+- Profile Management: Users can update their profiles, with the layout adjusting for different devices.
+- Media Queries: Implemented media queries to handle different screen widths, ensuring content scales smoothly without horizontal scrolling.
+
+Technologies and Techniques Used:
+
+- HTML/CSS: Structure and styling of the web application, with a focus on responsive design using Flexbox, Grid, and media queries.
+- BEM Methodology: Block Element Modifier (BEM) naming convention for organizing CSS and maintaining scalability and readability.
+- Figma: Used for designing and exporting images and layout elements, following the provided design mockups.
+- GitHub Pages: Deployed the project to GitHub Pages for easy access and sharing.
+
+Video: https://drive.google.com/file/d/1EFSakhHdUB8C7xEoBGBvyMH8VMPij8hx/view?usp=sharing
