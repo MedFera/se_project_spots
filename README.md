@@ -16,4 +16,4 @@ Technologies and Techniques Used:
 - Figma: Used for designing and exporting images and layout elements, following the provided design mockups.
 - GitHub Pages: Deployed the project to GitHub Pages for easy access and sharing.
 
-Video: https://drive.google.com/file/d/1EFSakhHdUB8C7xEoBGBvyMH8VMPij8hx/view?usp=sharing
+Video: https://drive.google.com/file/d/1aXWjZ2pcfLInVYxSK4KsPBI934DdQgyX/view?usp=sharing

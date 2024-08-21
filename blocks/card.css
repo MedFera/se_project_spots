@@ -1,5 +1,5 @@
 .card{
-width: 413px;
+width: 100%;
 }
 
 .card__image{
@@ -7,6 +7,8 @@ width: 413px;
   width: 413px;
   object-fit: cover;
   border-radius: 5%;
+  padding: 0;
+  margin: 0;
 }
 
 .card__content{
@@ -22,12 +24,23 @@ width: 413px;
   background-color: transparent;
   border: none;
   opacity: 40%;
+  cursor: pointer;
+}
+
+.card__like-btn:hover{
+  border: 2px solid rgba(33, 33, 33, 1)
 }
 
 .card__title{
+  font-family: Poppins, Arial ,sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin: 4px 0 0 0 ;
 }
 
 @media screen and (max-width: 627px) {
@@ -37,10 +50,11 @@ width: 413px;
   }
   .card{
     width: 288px;
+    cursor: pointer;
   }
 
   .card__title{
-    font-family: Poppins;
+    font-family: Poppins, Arial ,sans-serif;
     font-size: 16px;
     font-weight: 500;
     line-height: 18px;
