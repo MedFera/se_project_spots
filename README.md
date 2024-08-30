@@ -17,3 +17,5 @@ Technologies and Techniques Used:
 - GitHub Pages: Deployed the project to GitHub Pages for easy access and sharing.
 
 Video: https://drive.google.com/file/d/1aXWjZ2pcfLInVYxSK4KsPBI934DdQgyX/view?usp=sharing
+
+Pages: https://medfera.github.io/se_project_spots/index.html
