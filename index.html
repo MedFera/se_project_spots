@@ -80,6 +80,23 @@
       <footer class="footer page__section">
         <h2 class="footer__copyright">2024 &#169; Spots</h2>
       </footer>
+      <div class="modal">
+        <div class="modal__container">
+          <button class="modal__close-btn" type="submit"></button>
+          <h2 class="modal__title">Edit profile</h2>
+          <form name="edit-profile" class="modal__form">
+            <label class="modal__label" for="name">
+              Name
+              <input type="text" id="name" class="modal__input" placeholder="Name"/>
+            </label>
+            <label class="modal__label" for="description">
+              Description
+              <input type="text" id="description" class="modal__input" placeholder="Description" />
+            </label>
+            <button class="modal__submit-btn" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
     </div>
     <script src="./scripts/index.js" defer></script>
   </body>
