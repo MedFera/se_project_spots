@@ -7,51 +7,6 @@ const initialCards = [
   { name: "Mountain house", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg" }
 ];
 
-//Modal Functionality
-const profileEditButton = document.querySelector(".profile__edit-btn");
-
-const editModal = document.querySelector("#edit-modal");
-const editModalCloseButton = editModal.querySelector(".modal__close-btn");
-
-function openModal() {
-  editModal.classList.add("modal_opened");
-  fillProfileInputs();
-  //console.log("visible");
-}
-
-function closeModal() {
-  editModal.classList.remove("modal_opened");
-  //console.log("hidden");
-}
-
-//Edit and Update Profile
-const profileNameElement = document.querySelector(".profile__name");
-const profileJobElement = document.querySelector(".profile__description");
-const nameInput = document.querySelector("#profile-name-input");
-const jobInput = document.querySelector("#profile-description-input");
-
-function fillProfileInputs() {
-  nameInput.value = profileNameElement.textContent;
-  jobInput.value = profileJobElement.textContent;
-}
-
-const profileFormElement = document.querySelector(".modal__form");
-
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileNameElement.textContent = nameInput.value;
-  profileJobElement.textContent = jobInput.value;
-  closeModal();
-}
-
-
-//Event Listeners
-profileEditButton.addEventListener("click", openModal);
-editModalCloseButton.addEventListener("click", closeModal);
-profileFormElement.addEventListener("submit", handleProfileFormSubmit, true);
-
-
-
 //Build cards
 const cardsList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template");
@@ -66,15 +21,89 @@ function getCardElement(data) {
 }
 
 function generateCards() {
+  initialCards.forEach(card => {
+    cardsList.appendChild(getCardElement(card));
+  });
+}
 
-  for (let i = 0; i <= (initialCards.length - 1); i++) {
-
-    //console.log(newCard);
-    let newCard = getCardElement(initialCards[i]);
-    cardsList.appendChild(newCard);
-
-  }
-
+function addNewCardToScreen(){
+  cardsList.append(getCardElement(initialCards[(initialCards.length - 1)]));
 }
 
 generateCards()
+
+/*-----------------------------------------------------------------------------------*/
+
+//Modal Functionality
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+  fillProfileInputs();
+  //console.log("visible");
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  //console.log("hidden");
+}
+
+/*-----------------------------------------------------------------------------------*/
+
+//Edit and Update Profile
+const profileEditButton = document.querySelector(".profile__edit-btn");
+const editModal = document.querySelector("#edit-modal");
+const editModalCloseButton = editModal.querySelector(".modal__close-btn");
+
+//Selecting name and job elements
+const profileNameElement = document.querySelector(".profile__name");
+const profileJobElement = document.querySelector(".profile__description");
+const nameInput = document.querySelector("#profile-name-input");
+const jobInput = document.querySelector("#profile-description-input");
+
+function fillProfileInputs() {
+  nameInput.value = profileNameElement.textContent;
+  jobInput.value = profileJobElement.textContent;
+}
+
+const profileFormElement = editModal.querySelector(".modal__form");
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileNameElement.textContent = nameInput.value;
+  profileJobElement.textContent = jobInput.value;
+  closeModal(editModal);
+}
+
+/*-----------------------------------------------------------------------------------*/
+
+//Add Card Modal
+const newPostButton = document.querySelector(".profile__add-btn");
+const addCardModal = document.querySelector("#add-card-modal");
+const addCardModalCloseButton = addCardModal.querySelector(".modal__close-btn");
+
+//Getting new card link and caption
+const cardLink = addCardModal.querySelector("#add-card-link-input");
+const cardCaption = addCardModal.querySelector("#add-card-caption-input");
+
+//Append new cards to array
+function addNewCardToArray(cardCap, cardUrl){
+  const newCardObject = {name:cardCap, link:cardUrl};
+  initialCards.push(newCardObject);
+}
+
+const addCardFormElement = addCardModal.querySelector(".modal__form");
+
+function handleAddCardFormSubmit(evt){
+  evt.preventDefault();
+  addNewCardToArray(cardCaption.value, cardLink.value);
+  addNewCardToScreen();
+  closeModal(addCardModal);
+}
+/*-----------------------------------------------------------------------------------*/
+
+//Event Listeners
+profileEditButton.addEventListener("click", () => openModal(editModal));
+editModalCloseButton.addEventListener("click", () => closeModal(editModal));
+newPostButton.addEventListener("click", () =>  openModal(addCardModal));
+addCardModalCloseButton.addEventListener("click", () => closeModal(addCardModal));
+profileFormElement.addEventListener("submit", handleProfileFormSubmit, true);
+addCardFormElement.addEventListener("submit", handleAddCardFormSubmit, true);

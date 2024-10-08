@@ -111,6 +111,25 @@
           </form>
         </div>
       </div>
+      <div class="modal" id="add-card-modal">
+        <div class="modal__container">
+          <button class="modal__close-btn" type="submit">
+            <img src="./images/close-icon.svg" alt="" class="modal__close-img">
+          </button>
+          <h2 class="modal__title">Edit profile</h2>
+          <form name="add-card-form" class="modal__form">
+            <label class="modal__label" for="add-card-link-input">
+              Image Link
+              <input type="url" name="link" id="add-card-link-input" class="modal__input" placeholder="Paste a link to the picture"/>
+            </label>
+            <label class="modal__label" for="add-card-caption-input">
+              Caption
+              <input type="text" name="caption" id="add-card-caption-input" class="modal__input" placeholder="Type your caption" />
+            </label>
+            <button class="modal__submit-btn" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
     </div>
     <script src="./scripts/index.js" defer></script>
   </body>
