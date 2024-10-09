@@ -31,6 +31,20 @@ width: 100%;
   opacity: 1;
 }
 
+.card__like-btn--liked{
+  background-image: url("../images/like-icon-active.svg");
+  height: 20px;
+  width: 23px;
+  background-color: transparent;
+  border: none;
+  opacity: 100%;
+  cursor: pointer;
+}
+
+.card__like-btn--liked:hover{
+  opacity: 50%;
+}
+
 .card__title{
   max-width: 350px;
   font-family: Poppins, Arial ,sans-serif;
@@ -69,5 +83,10 @@ width: 100%;
     background-image: url("../images/like-icon-small.svg");
   }
 
+  .card__like-btn--liked{
+    background-image: url("../images/like-icon-active-small.svg");
+    height: 18px;
+    width: 20px;
+  }
 
 }

@@ -100,6 +100,39 @@ function handleAddCardFormSubmit(evt){
 }
 /*-----------------------------------------------------------------------------------*/
 
+//Get all like buttons
+const allLikeButtonElements = document.querySelectorAll("#like-btn");
+
+//Add red heart icon to post
+function likePost(button){
+  button.classList.remove("card__like-btn");
+  button.classList.add("card__like-btn--liked");
+}
+
+//Remove red heart icon from post
+function unlikePost(button){
+  button.classList.remove("card__like-btn--liked");
+  button.classList.add("card__like-btn");
+}
+
+//Like button event handler
+function handleLikeButtonClick(evt){
+  evt.preventDefault();
+  const clickedButton = evt.target;
+  if (clickedButton.classList.contains("card__like-btn")){
+    likePost(clickedButton);
+  }
+  else if (clickedButton.classList.contains("card__like-btn--liked")){
+    unlikePost(clickedButton);
+  }
+  else{
+    console.log("ERROR WITH LIKE BUTTONS");
+  }
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+
 //Event Listeners
 profileEditButton.addEventListener("click", () => openModal(editModal));
 editModalCloseButton.addEventListener("click", () => closeModal(editModal));
@@ -107,3 +140,6 @@ newPostButton.addEventListener("click", () =>  openModal(addCardModal));
 addCardModalCloseButton.addEventListener("click", () => closeModal(addCardModal));
 profileFormElement.addEventListener("submit", handleProfileFormSubmit, true);
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit, true);
+allLikeButtonElements.forEach(button => {
+  button.addEventListener("click", handleLikeButtonClick, true);
+});
