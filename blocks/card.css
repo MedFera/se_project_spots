@@ -33,7 +33,7 @@ position: relative;
   opacity: 1;
 }
 
-.card__like-btn--liked{
+.card__like-btn__active{
   background-image: url("../images/like-icon-active.svg");
   height: 20px;
   width: 23px;
@@ -43,7 +43,7 @@ position: relative;
   cursor: pointer;
 }
 
-.card__like-btn--liked:hover{
+.card__like-btn__active:hover{
   opacity: 50%;
 }
 
@@ -101,7 +101,7 @@ position: relative;
     background-image: url("../images/like-icon-small.svg");
   }
 
-  .card__like-btn--liked{
+  .card__like-btn__active{
     background-image: url("../images/like-icon-active-small.svg");
     height: 18px;
     width: 20px;

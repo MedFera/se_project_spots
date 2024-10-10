@@ -22,7 +22,7 @@ function getCardElement(data) {
 
 function generateCards() {
   initialCards.forEach(card => {
-    cardsList.appendChild(getCardElement(card));
+    addNewCardToScreen(card);
   });
 }
 
@@ -33,7 +33,7 @@ generateCards()
 //Modal Functionality
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  fillProfileInputs();
+  
   //console.log("visible");
 }
 
@@ -83,16 +83,7 @@ const cardCaption = addCardModal.querySelector("#add-card-caption-input");
 //Add card to Screen
 function addNewCardToScreen(cardObject){
   cardsList.appendChild(getCardElement(cardObject));
-}
-
-const addCardFormElement = addCardModal.querySelector(".modal__form");
-
-function handleAddCardFormSubmit(evt){
-  evt.preventDefault();
-  const newCardObject = {name: cardCaption.value, link: cardLink.value};
-  addNewCardToScreen(newCardObject);
-  const allCards = cardsList.querySelectorAll(".card");
-  const newCard = allCards[allCards.length - 1]
+  const newCard = cardsList.lastChild;
 
   //Add Like-Button Event Listener
   const newCardLikeBtn = newCard.querySelector("#like-btn");
@@ -105,22 +96,29 @@ function handleAddCardFormSubmit(evt){
   //Add Preview-Modal Event Listener
   newCardImage = newCard.querySelector(".card__image");
   newCardImage.addEventListener("click",handleImagePreviewModal, true);
+  
+}
+
+const addCardFormElement = addCardModal.querySelector(".modal__form");
+
+function handleAddCardFormSubmit(evt){
+  evt.preventDefault();
+  const newCardObject = {name: cardCaption.value, link: cardLink.value};
+  addNewCardToScreen(newCardObject);
   closeModal(addCardModal);
 }
 /*-----------------------------------------------------------------------------------*/
 
-//Get all like buttons
-const allLikeButtonElements = cardsList.querySelectorAll("#like-btn");
 
 //Add red heart icon to post
 function likePost(button){
   button.classList.remove("card__like-btn");
-  button.classList.add("card__like-btn--liked");
+  button.classList.add("card__like-btn__active");
 }
 
 //Remove red heart icon from post
 function unlikePost(button){
-  button.classList.remove("card__like-btn--liked");
+  button.classList.remove("card__like-btn__active");
   button.classList.add("card__like-btn");
 }
 
@@ -131,7 +129,7 @@ function handleLikeButtonClick(evt){
   if (clickedButton.classList.contains("card__like-btn")){
     likePost(clickedButton);
   }
-  else if (clickedButton.classList.contains("card__like-btn--liked")){
+  else if (clickedButton.classList.contains("card__like-btn__active")){
     unlikePost(clickedButton);
   }
   else{
@@ -141,22 +139,18 @@ function handleLikeButtonClick(evt){
 
 /*-----------------------------------------------------------------------------------*/
 
-//Delete Button Functionality
-const allDeleteButtonElements = cardsList.querySelectorAll(".card__delete-btn");
-
-
 //Gets button from click access parent element and removes from DOM
 function handleDeleteButtonClick(evt){
   evt.preventDefault();
   const clickedButton = evt.target;
-  const cardElementToDelete = clickedButton.parentElement;
+  const cardElementToDelete = clickedButton.closest(".card");
+  //console.log(cardElementToDelete);
   cardElementToDelete.remove();
 }
 
 /*-----------------------------------------------------------------------------------*/
 
 //Preview Modal Functionality
-const allPictureElementsFromCards = cardsList.querySelectorAll(".card__image");
 const imagePreviewModal = document.querySelector("#preview-modal")
 const imageElementOfModal = imagePreviewModal.querySelector(".modal__image");
 const textElementOfModal = imagePreviewModal.querySelector(".modal__caption");
@@ -175,19 +169,10 @@ function handleImagePreviewModal(evt){
 /*-----------------------------------------------------------------------------------*/
 
 //Event Listeners
-profileEditButton.addEventListener("click", () => openModal(editModal));
+profileEditButton.addEventListener("click", () => {openModal(editModal);fillProfileInputs();});
 editModalCloseButton.addEventListener("click", () => closeModal(editModal));
 newPostButton.addEventListener("click", () =>  openModal(addCardModal));
 addCardModalCloseButton.addEventListener("click", () => closeModal(addCardModal));
 modalCloseBtn.addEventListener("click", ()=> closeModal(imagePreviewModal));
 profileFormElement.addEventListener("submit", handleProfileFormSubmit, true);
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit, true);
-allLikeButtonElements.forEach(button => {
-  button.addEventListener("click", handleLikeButtonClick, true);
-});
-allDeleteButtonElements.forEach(button => {
-  button.addEventListener("click",handleDeleteButtonClick,true);
-})
-allPictureElementsFromCards.forEach(picture => {
-  picture.addEventListener("click", handleImagePreviewModal, true);
-})
