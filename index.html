@@ -36,6 +36,7 @@
             <template id="card-template">
               <li class="card">
                 <img src="" alt="" class="card__image">
+                <button class="card__delete-btn"></button>
                 <div class="card__content">
                   <h2 class="card__title"></h2>
                   <button type="button" class="card__like-btn" id="like-btn"></button>
@@ -94,7 +95,7 @@
       </footer>
       <div class="modal" id="edit-modal">
         <div class="modal__container">
-          <button class="modal__close-btn" type="submit">
+          <button class="modal__close" type="submit">
             <img src="./images/close-icon.svg" alt="" class="modal__close-img">
           </button>
           <h2 class="modal__title">Edit profile</h2>
@@ -113,10 +114,10 @@
       </div>
       <div class="modal" id="add-card-modal">
         <div class="modal__container">
-          <button class="modal__close-btn" type="submit">
+          <button class="modal__close" type="submit">
             <img src="./images/close-icon.svg" alt="" class="modal__close-img">
           </button>
-          <h2 class="modal__title">Edit profile</h2>
+          <h2 class="modal__title">New Post</h2>
           <form name="add-card-form" class="modal__form">
             <label class="modal__label" for="add-card-link-input">
               Image Link
@@ -128,6 +129,14 @@
             </label>
             <button class="modal__submit-btn" type="submit">Save</button>
           </form>
+        </div>
+      </div>
+      <div class="modal" id="preview-modal">
+        <div class="modal__container modal__container_type_preview">
+          <button class="modal__close modal__close_type_preview" type="submit">
+          </button>
+          <img class="modal__image" src="#" alt="">
+          <p class="modal__caption"></p>
         </div>
       </div>
     </div>

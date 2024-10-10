@@ -26,10 +26,6 @@ function generateCards() {
   });
 }
 
-function addNewCardToScreen(){
-  cardsList.append(getCardElement(initialCards[(initialCards.length - 1)]));
-}
-
 generateCards()
 
 /*-----------------------------------------------------------------------------------*/
@@ -51,7 +47,7 @@ function closeModal(modal) {
 //Edit and Update Profile
 const profileEditButton = document.querySelector(".profile__edit-btn");
 const editModal = document.querySelector("#edit-modal");
-const editModalCloseButton = editModal.querySelector(".modal__close-btn");
+const editModalCloseButton = editModal.querySelector(".modal__close");
 
 //Selecting name and job elements
 const profileNameElement = document.querySelector(".profile__name");
@@ -78,30 +74,43 @@ function handleProfileFormSubmit(evt) {
 //Add Card Modal
 const newPostButton = document.querySelector(".profile__add-btn");
 const addCardModal = document.querySelector("#add-card-modal");
-const addCardModalCloseButton = addCardModal.querySelector(".modal__close-btn");
+const addCardModalCloseButton = addCardModal.querySelector(".modal__close");
 
 //Getting new card link and caption
 const cardLink = addCardModal.querySelector("#add-card-link-input");
 const cardCaption = addCardModal.querySelector("#add-card-caption-input");
 
-//Append new cards to array
-function addNewCardToArray(cardCap, cardUrl){
-  const newCardObject = {name:cardCap, link:cardUrl};
-  initialCards.push(newCardObject);
+//Add card to Screen
+function addNewCardToScreen(cardObject){
+  cardsList.appendChild(getCardElement(cardObject));
 }
 
 const addCardFormElement = addCardModal.querySelector(".modal__form");
 
 function handleAddCardFormSubmit(evt){
   evt.preventDefault();
-  addNewCardToArray(cardCaption.value, cardLink.value);
-  addNewCardToScreen();
+  const newCardObject = {name: cardCaption.value, link: cardLink.value};
+  addNewCardToScreen(newCardObject);
+  const allCards = cardsList.querySelectorAll(".card");
+  const newCard = allCards[allCards.length - 1]
+
+  //Add Like-Button Event Listener
+  const newCardLikeBtn = newCard.querySelector("#like-btn");
+  newCardLikeBtn.addEventListener("click", handleLikeButtonClick, true);
+
+  //Add Delete-Button Event Listener
+  const newCardDeleteBtn = newCard.querySelector(".card__delete-btn");
+  newCardDeleteBtn.addEventListener("click", handleDeleteButtonClick, true);
+
+  //Add Preview-Modal Event Listener
+  newCardImage = newCard.querySelector(".card__image");
+  newCardImage.addEventListener("click",handleImagePreviewModal, true);
   closeModal(addCardModal);
 }
 /*-----------------------------------------------------------------------------------*/
 
 //Get all like buttons
-const allLikeButtonElements = document.querySelectorAll("#like-btn");
+const allLikeButtonElements = cardsList.querySelectorAll("#like-btn");
 
 //Add red heart icon to post
 function likePost(button){
@@ -130,7 +139,39 @@ function handleLikeButtonClick(evt){
   }
 }
 
+/*-----------------------------------------------------------------------------------*/
 
+//Delete Button Functionality
+const allDeleteButtonElements = cardsList.querySelectorAll(".card__delete-btn");
+
+
+//Gets button from click access parent element and removes from DOM
+function handleDeleteButtonClick(evt){
+  evt.preventDefault();
+  const clickedButton = evt.target;
+  const cardElementToDelete = clickedButton.parentElement;
+  cardElementToDelete.remove();
+}
+
+/*-----------------------------------------------------------------------------------*/
+
+//Preview Modal Functionality
+const allPictureElementsFromCards = cardsList.querySelectorAll(".card__image");
+const imagePreviewModal = document.querySelector("#preview-modal")
+const imageElementOfModal = imagePreviewModal.querySelector(".modal__image");
+const textElementOfModal = imagePreviewModal.querySelector(".modal__caption");
+const modalCloseBtn = imagePreviewModal.querySelector(".modal__close_type_preview");
+
+function handleImagePreviewModal(evt){
+  evt.preventDefault();
+  const clickedImage = evt.target;
+  imageElementOfModal.src = clickedImage.src;
+  const cardOfImage = clickedImage.parentElement;
+  const captionText = cardOfImage.querySelector(".card__title");
+  imageElementOfModal.alt = captionText.textContent;
+  textElementOfModal.textContent = captionText.textContent;
+  openModal(imagePreviewModal);
+}
 /*-----------------------------------------------------------------------------------*/
 
 //Event Listeners
@@ -138,8 +179,15 @@ profileEditButton.addEventListener("click", () => openModal(editModal));
 editModalCloseButton.addEventListener("click", () => closeModal(editModal));
 newPostButton.addEventListener("click", () =>  openModal(addCardModal));
 addCardModalCloseButton.addEventListener("click", () => closeModal(addCardModal));
+modalCloseBtn.addEventListener("click", ()=> closeModal(imagePreviewModal));
 profileFormElement.addEventListener("submit", handleProfileFormSubmit, true);
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit, true);
 allLikeButtonElements.forEach(button => {
   button.addEventListener("click", handleLikeButtonClick, true);
 });
+allDeleteButtonElements.forEach(button => {
+  button.addEventListener("click",handleDeleteButtonClick,true);
+})
+allPictureElementsFromCards.forEach(picture => {
+  picture.addEventListener("click", handleImagePreviewModal, true);
+})
