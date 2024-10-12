@@ -17,6 +17,19 @@ function getCardElement(data) {
   cardImage.setAttribute("src", data.link);
   cardImage.setAttribute("alt", data.name);
   cardElement.querySelector(".card__title").textContent = data.name;
+
+  //Add Like-Button Event Listener
+  const newCardLikeBtn = cardElement.querySelector("#like-btn");
+  newCardLikeBtn.addEventListener("click", handleLikeButtonClick, true);
+
+  //Add Delete-Button Event Listener
+  const newCardDeleteBtn = cardElement.querySelector(".card__delete-btn");
+  newCardDeleteBtn.addEventListener("click", handleDeleteButtonClick, true);
+
+  //Add Preview-Modal Event Listener
+  newCardImage = cardElement.querySelector(".card__image");
+  newCardImage.addEventListener("click",handleImagePreviewModal, true);
+
   return cardElement
 }
 
@@ -82,21 +95,10 @@ const cardCaption = addCardModal.querySelector("#add-card-caption-input");
 
 //Add card to Screen
 function addNewCardToScreen(cardObject){
-  cardsList.appendChild(getCardElement(cardObject));
-  const newCard = cardsList.lastChild;
+  const firstCard = cardsList.querySelector(".card");
+  cardsList.insertBefore(getCardElement(cardObject),firstCard);
+  const newCard = cardsList.querySelector(".card");
 
-  //Add Like-Button Event Listener
-  const newCardLikeBtn = newCard.querySelector("#like-btn");
-  newCardLikeBtn.addEventListener("click", handleLikeButtonClick, true);
-
-  //Add Delete-Button Event Listener
-  const newCardDeleteBtn = newCard.querySelector(".card__delete-btn");
-  newCardDeleteBtn.addEventListener("click", handleDeleteButtonClick, true);
-
-  //Add Preview-Modal Event Listener
-  newCardImage = newCard.querySelector(".card__image");
-  newCardImage.addEventListener("click",handleImagePreviewModal, true);
-  
 }
 
 const addCardFormElement = addCardModal.querySelector(".modal__form");
@@ -104,6 +106,8 @@ const addCardFormElement = addCardModal.querySelector(".modal__form");
 function handleAddCardFormSubmit(evt){
   evt.preventDefault();
   const newCardObject = {name: cardCaption.value, link: cardLink.value};
+  cardLink.value = "";
+  cardLink.value = "";
   addNewCardToScreen(newCardObject);
   closeModal(addCardModal);
 }
