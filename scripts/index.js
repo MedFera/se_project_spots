@@ -46,7 +46,7 @@ generateCards()
 //Modal Functionality
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  
+
   //console.log("visible");
 }
 
@@ -158,13 +158,13 @@ function handleDeleteButtonClick(evt){
 const imagePreviewModal = document.querySelector("#preview-modal")
 const imageElementOfModal = imagePreviewModal.querySelector(".modal__image");
 const textElementOfModal = imagePreviewModal.querySelector(".modal__caption");
-const modalCloseBtn = imagePreviewModal.querySelector(".modal__close_type_preview");
+const previewModalCloseBtn = imagePreviewModal.querySelector(".modal__close_type_preview");
 
 function handleImagePreviewModal(evt){
   evt.preventDefault();
   const clickedImage = evt.target;
   imageElementOfModal.src = clickedImage.src;
-  const cardOfImage = clickedImage.parentElement;
+  const cardOfImage = clickedImage.closest(".card");
   const captionText = cardOfImage.querySelector(".card__title");
   imageElementOfModal.alt = captionText.textContent;
   textElementOfModal.textContent = captionText.textContent;
@@ -177,6 +177,6 @@ profileEditButton.addEventListener("click", () => {openModal(editModal);fillProf
 editModalCloseButton.addEventListener("click", () => closeModal(editModal));
 newPostButton.addEventListener("click", () =>  openModal(addCardModal));
 addCardModalCloseButton.addEventListener("click", () => closeModal(addCardModal));
-modalCloseBtn.addEventListener("click", ()=> closeModal(imagePreviewModal));
+previewModalCloseBtn.addEventListener("click", ()=> closeModal(imagePreviewModal));
 profileFormElement.addEventListener("submit", handleProfileFormSubmit, true);
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit, true);
