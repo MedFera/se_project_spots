@@ -27,8 +27,7 @@ function getCardElement(data) {
   newCardDeleteBtn.addEventListener("click", handleDeleteButtonClick, true);
 
   //Add Preview-Modal Event Listener
-  newCardImage = cardElement.querySelector(".card__image");
-  newCardImage.addEventListener("click",handleImagePreviewModal, true);
+  cardImage.addEventListener("click",handleImagePreviewModal, true);
 
   return cardElement
 }
@@ -95,10 +94,7 @@ const cardCaption = addCardModal.querySelector("#add-card-caption-input");
 
 //Add card to Screen
 function addNewCardToScreen(cardObject){
-  const firstCard = cardsList.querySelector(".card");
-  cardsList.insertBefore(getCardElement(cardObject),firstCard);
-  const newCard = cardsList.querySelector(".card");
-
+  cardsList.prepend(getCardElement(cardObject));
 }
 
 const addCardFormElement = addCardModal.querySelector(".modal__form");
@@ -116,28 +112,23 @@ function handleAddCardFormSubmit(evt){
 
 //Add red heart icon to post
 function likePost(button){
-  button.classList.remove("card__like-btn");
   button.classList.add("card__like-btn__active");
 }
 
 //Remove red heart icon from post
 function unlikePost(button){
   button.classList.remove("card__like-btn__active");
-  button.classList.add("card__like-btn");
 }
 
 //Like button event handler
 function handleLikeButtonClick(evt){
   evt.preventDefault();
   const clickedButton = evt.target;
-  if (clickedButton.classList.contains("card__like-btn")){
-    likePost(clickedButton);
-  }
-  else if (clickedButton.classList.contains("card__like-btn__active")){
+  if (clickedButton.classList.contains("card__like-btn__active")){
     unlikePost(clickedButton);
   }
   else{
-    console.log("ERROR WITH LIKE BUTTONS");
+    likePost(clickedButton);
   }
 }
 
