@@ -102,8 +102,7 @@ const addCardFormElement = addCardModal.querySelector(".modal__form");
 function handleAddCardFormSubmit(evt){
   evt.preventDefault();
   const newCardObject = {name: cardCaption.value, link: cardLink.value};
-  cardLink.value = "";
-  cardLink.value = "";
+  evt.target.reset();
   addNewCardToScreen(newCardObject);
   closeModal(addCardModal);
 }
@@ -123,13 +122,7 @@ function unlikePost(button){
 //Like button event handler
 function handleLikeButtonClick(evt){
   evt.preventDefault();
-  const clickedButton = evt.target;
-  if (clickedButton.classList.contains("card__like-btn__active")){
-    unlikePost(clickedButton);
-  }
-  else{
-    likePost(clickedButton);
-  }
+  evt.target.classList.toggle("card__like-btn__active");
 }
 
 /*-----------------------------------------------------------------------------------*/
