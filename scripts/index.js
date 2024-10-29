@@ -103,8 +103,11 @@ function handleAddCardFormSubmit(evt){
   evt.preventDefault();
   const newCardObject = {name: cardCaption.value, link: cardLink.value};
   evt.target.reset();
+  const cardSubmitButton = evt.target.querySelector(settings.submitButtonSelector);
+  disableButton(cardSubmitButton, settings);
   addNewCardToScreen(newCardObject);
   closeModal(addCardModal);
+
 }
 /*-----------------------------------------------------------------------------------*/
 
@@ -155,6 +158,11 @@ function handleImagePreviewModal(evt){
   openModal(imagePreviewModal);
 }
 /*-----------------------------------------------------------------------------------*/
+
+
+
+
+
 
 //Event Listeners
 profileEditButton.addEventListener("click", () => {openModal(editModal);fillProfileInputs();});
