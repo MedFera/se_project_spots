@@ -42,16 +42,34 @@ generateCards()
 
 /*-----------------------------------------------------------------------------------*/
 
+function modalEscapeKeyEvent(evt, modal){
+  if (evt.key === "Escape"){
+    closeModal(modal);
+  }
+
+}
+
+function modalClickEvent(evt, modal) {
+  if(evt.target.id.includes("modal")){
+    closeModal(modal);
+  }
+}
+
 //Modal Functionality
 function openModal(modal) {
   modal.classList.add("modal_opened");
 
-  //console.log("visible");
+  //Close modal on Escape Keydown
+  window.addEventListener("keydown", (e) => modalEscapeKeyEvent(e,modal));
+
+  //Close modal on Click outside modal container
+  modal.addEventListener("click", (e) => modalClickEvent(e,modal));
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  //console.log("hidden");
+  window.removeEventListener("keydown", (e) => modalEscapeKeyEvent(e,modal));
+  modal.removeEventListener("click", (e) => modalClickEvent(e,modal));
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -159,7 +177,10 @@ function handleImagePreviewModal(evt){
 }
 /*-----------------------------------------------------------------------------------*/
 
-
+//Modal UX features for closing
+function closeOnEscape(evt) {
+  console.log(evt);
+}
 
 
 
