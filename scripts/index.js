@@ -42,14 +42,16 @@ generateCards()
 
 /*-----------------------------------------------------------------------------------*/
 
-function modalEscapeKeyEvent(evt, modal){
-  if (evt.key === "Escape"){
+function modalEscapeKeyEvent(evt){
+  const modal = document.querySelector(".modal_opened");
+  if(evt.key === "Escape"){
     closeModal(modal);
   }
 
 }
 
-function modalClickEvent(evt, modal) {
+function modalClickEvent(evt) {
+  const modal = document.querySelector(".modal_opened");
   if(evt.target.id.includes("modal")){
     closeModal(modal);
   }
@@ -60,16 +62,16 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
 
   //Close modal on Escape Keydown
-  window.addEventListener("keydown", (e) => modalEscapeKeyEvent(e,modal));
+  window.addEventListener("keydown", modalEscapeKeyEvent, false);
 
   //Close modal on Click outside modal container
-  modal.addEventListener("click", (e) => modalClickEvent(e,modal));
+  modal.addEventListener("click", modalClickEvent,false);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  window.removeEventListener("keydown", (e) => modalEscapeKeyEvent(e,modal));
-  modal.removeEventListener("click", (e) => modalClickEvent(e,modal));
+  window.removeEventListener("keydown", modalEscapeKeyEvent, false);
+  modal.removeEventListener("click", modalClickEvent, false);
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -88,6 +90,9 @@ const jobInput = document.querySelector("#profile-description-input");
 function fillProfileInputs() {
   nameInput.value = profileNameElement.textContent;
   jobInput.value = profileJobElement.textContent;
+
+  //Reset Validation on open in case bad values were given previously
+  resetValidation(editModal.querySelector(".modal__form"), [nameInput, jobInput]);
 }
 
 const profileFormElement = editModal.querySelector(".modal__form");

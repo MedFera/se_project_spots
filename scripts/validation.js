@@ -18,6 +18,12 @@ function disableButton(button, config){
   button.classList.add(config.inactiveButtonClass);
 }
 
+function resetValidation (formElement, inputList){
+  inputList.forEach((input) => {
+    hideInputError(formElement, input, settings);
+  });
+}
+
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   //console.log(inputElement.id);
