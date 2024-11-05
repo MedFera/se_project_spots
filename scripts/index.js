@@ -42,18 +42,16 @@ generateCards()
 
 /*-----------------------------------------------------------------------------------*/
 
-function modalEscapeKeyEvent(evt){
-  const modal = document.querySelector(".modal_opened");
+function handleEscape(evt){
   if(evt.key === "Escape"){
+    const modal = document.querySelector(".modal_opened");
     closeModal(modal);
   }
-
 }
 
-function modalClickEvent(evt) {
-  const modal = document.querySelector(".modal_opened");
+function handleOverlay(evt) {
   if(evt.target.id.includes("modal")){
-    closeModal(modal);
+    closeModal(evt.target);
   }
 }
 
@@ -62,16 +60,16 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
 
   //Close modal on Escape Keydown
-  window.addEventListener("keydown", modalEscapeKeyEvent, false);
+  window.addEventListener("keydown", handleEscape, false);
 
   //Close modal on Click outside modal container
-  modal.addEventListener("click", modalClickEvent,false);
+  modal.addEventListener("click", handleOverlay,false);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  window.removeEventListener("keydown", modalEscapeKeyEvent, false);
-  modal.removeEventListener("click", modalClickEvent, false);
+  window.removeEventListener("keydown", handleEscape, false);
+  modal.removeEventListener("click", handleOverlay, false);
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -87,15 +85,15 @@ const profileJobElement = document.querySelector(".profile__description");
 const nameInput = document.querySelector("#profile-name-input");
 const jobInput = document.querySelector("#profile-description-input");
 
+const profileFormElement = editModal.querySelector(".modal__form");
+
 function fillProfileInputs() {
   nameInput.value = profileNameElement.textContent;
   jobInput.value = profileJobElement.textContent;
 
   //Reset Validation on open in case bad values were given previously
-  resetValidation(editModal.querySelector(".modal__form"), [nameInput, jobInput]);
+  resetValidation(profileFormElement, [nameInput, jobInput]);
 }
-
-const profileFormElement = editModal.querySelector(".modal__form");
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
