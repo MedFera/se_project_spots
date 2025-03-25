@@ -1,4 +1,4 @@
-const settings = {
+export const validationConfig = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__submit-btn",
@@ -13,14 +13,14 @@ function enableButton(button, config){
   button.classList.remove(config.inactiveButtonClass);
 }
 
-function disableButton(button, config){
+export function disableButton(button, config){
   button.disabled = true;
   button.classList.add(config.inactiveButtonClass);
 }
 
-function resetValidation (formElement, inputList){
+export function resetValidation (formElement, inputList){
   inputList.forEach((input) => {
-    hideInputError(formElement, input, settings);
+    hideInputError(formElement, input, validationConfig);
   });
 }
 
@@ -42,9 +42,9 @@ const hideInputError = (formElement, inputElement, config) => {
 
 const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
+    showInputError(formElement, inputElement, inputElement.validationMessage, validationConfig);
   } else {
-    hideInputError(formElement, inputElement, settings);
+    hideInputError(formElement, inputElement, validationConfig);
   }
 };
 
@@ -57,9 +57,9 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   //console.log(hasInvalidInput(inputList));
   if (hasInvalidInput(inputList)) {
-    disableButton(buttonElement, settings);
+    disableButton(buttonElement, validationConfig);
   } else {
-    enableButton(buttonElement, settings);
+    enableButton(buttonElement, validationConfig);
   }
 };
 
@@ -75,13 +75,12 @@ const setEventListeners = (formElement, config) => {
   });
 };
 
-const enableValidation = (config) => {
+export const enableValidation = (config) => {
   const formList = document.querySelectorAll(config.formSelector);
 
   formList.forEach((formElement) => {
-    setEventListeners(formElement,settings);
+    setEventListeners(formElement,validationConfig);
   })
 
 };
 
-enableValidation(settings);

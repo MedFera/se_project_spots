@@ -1,0 +1,11 @@
+{
+  "name": "se_project_spots",
+  "version": "1.0.0",
+  "description": "Adaptive Web Design and Working with Layouts - Sprint 3\r Project Name: Spots - Interactive Social Media Web Application\r Project Description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Medin",
+  "license": "ISC"
+}
