@@ -1,3 +1,5 @@
+import { enableValidation, validationConfig, resetValidation, disableButton} from "./validation.js";
+
 const initialCards = [
   { name: "Val Thorens", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg" },
   { name: "Restaurant terrace", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg" },
@@ -124,8 +126,8 @@ function handleAddCardFormSubmit(evt){
   evt.preventDefault();
   const newCardObject = {name: cardCaption.value, link: cardLink.value};
   evt.target.reset();
-  const cardSubmitButton = evt.target.querySelector(settings.submitButtonSelector);
-  disableButton(cardSubmitButton, settings);
+  const cardSubmitButton = evt.target.querySelector(validationConfig.submitButtonSelector);
+  disableButton(cardSubmitButton, validationConfig);
   addNewCardToScreen(newCardObject);
   closeModal(addCardModal);
 
@@ -196,3 +198,5 @@ addCardModalCloseButton.addEventListener("click", () => closeModal(addCardModal)
 previewModalCloseBtn.addEventListener("click", ()=> closeModal(imagePreviewModal));
 profileFormElement.addEventListener("submit", handleProfileFormSubmit, true);
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit, true);
+
+enableValidation(validationConfig)

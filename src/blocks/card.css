@@ -20,7 +20,7 @@ position: relative;
 }
 
 .card__like-btn {
-  background-image: url("../images/like-icon.svg");
+  background-image: url("/src/images/like-icon.svg");
   height: 20px;
   width: 23px;
   background-color: transparent;
@@ -34,7 +34,7 @@ position: relative;
 }
 
 .card__like-btn__active{
-  background-image: url("../images/like-icon-active.svg");
+  background-image: url("/src/images/like-icon-active.svg");
   height: 20px;
   width: 23px;
   background-color: transparent;
@@ -61,7 +61,7 @@ position: relative;
 }
 
 .card__delete-btn{
-  background-image: url("../images/delete-btn.svg");
+  background-image: url("/src/images/delete-btn.svg");
   position: absolute;
   top: 10px;
   right: 10px;
@@ -73,7 +73,7 @@ position: relative;
 }
 
 .card__delete-btn:hover{
-  background-image: url("../images/delete-btn-hover.svg");
+  background-image: url("/src/images/delete-btn-hover.svg");
 }
 
 @media screen and (max-width: 627px) {
@@ -98,11 +98,11 @@ position: relative;
   .card__like-btn{
     height: 18px;
     width: 20px;
-    background-image: url("../images/like-icon-small.svg");
+    background-image: url("/src/images/like-icon-small.svg");
   }
 
   .card__like-btn__active{
-    background-image: url("../images/like-icon-active-small.svg");
+    background-image: url("/src/images/like-icon-active-small.svg");
     height: 18px;
     width: 20px;
   }
