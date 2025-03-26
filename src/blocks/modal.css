@@ -61,7 +61,7 @@
 }
 
 .modal__close_type_preview {
-  background: url("/src/images/preview-modal-close-icon.svg");
+  background: url("../images/preview-modal-close-icon.svg");
   background-color: transparent;
   top: 0px;
   right: -55.5px;
@@ -208,7 +208,7 @@
   }
 
   .modal__close_type_preview {
-    background: url("/src/images/preview-modal-close-icon.svg");
+    background: url("../images/preview-modal-close-icon.svg");
     background-color: transparent;
     top: -48px;
     right: 0px;
