@@ -1,5 +1,15 @@
 import { enableValidation, validationConfig, resetValidation, disableButton} from "../scripts/validation.js";
 import "./index.css";
+import Api from "../scripts/api.js";
+
+const api = new Api({
+  baseURL: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "e3f4f20d-c063-46f8-8c27-655cb090d174",
+    "Content-Type": "application/json"
+  }
+});
+console.log(api.getInitialCards())
 
 const initialCards = [
   { name: "Val Thorens", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg" },
