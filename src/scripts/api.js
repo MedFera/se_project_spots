@@ -14,21 +14,27 @@ DELETE /cards/:cardId/likes – Dislike a card
 
 class Api {
   constructor(options) {
-    this.baseURL = options.baseURL;
-    this.headers = options.headers;
+    this._baseURL = options.baseURL;
+    this._headers = options.headers;
   }
 
   getInitialCards(){
-    return fetch(this.baseURL, this.headers)
+    console.log(this._baseURL);
+    console.log(this._headers);
+
+    return fetch(this._baseURL+"/cards", this._headers)
     .then(res => {
       if (res.ok) {
         return res.json();
       }
       return Promise.reject(`Error: ${res.status}`);
     })
+    .then((data)=>{
+      return data
+    })
     .catch(err =>{
       console.log(err)
-    })
+    });
   }
 }
 
