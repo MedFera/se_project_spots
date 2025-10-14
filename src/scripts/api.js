@@ -22,7 +22,7 @@ class Api {
     console.log(this._baseURL);
     console.log(this._headers);
 
-    return fetch(this._baseURL+"/cards", this._headers)
+    return fetch(this._baseURL+"/cards", {headers: this._headers})
     .then(res => {
       if (res.ok) {
         return res.json();
