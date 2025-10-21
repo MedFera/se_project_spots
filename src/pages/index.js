@@ -10,17 +10,25 @@ const api = new Api({
   }
 });
 
-api.getInitialCards()
-.then(cards =>{
+
+api.getAppInfo()
+.then(([cards, userInfo])=>{
+  //Card posts production
   cards.forEach((card) =>{
     addNewCardToScreen(card)
   })
+
+  //User info production
+  console.log(userInfo)
+  profileNameElement.textContent = userInfo.name
+  profileJobElement.textContent = userInfo.about
+  profilePicture.src = userInfo.avatar
+
+
 })
 .catch(err =>{
   console.log(err)
 });
-
-
 
 // const initialCards = [
 //   { name: "Val Thorens", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg" },
@@ -109,6 +117,10 @@ const profileJobElement = document.querySelector(".profile__description");
 const nameInput = document.querySelector("#profile-name-input");
 const jobInput = document.querySelector("#profile-description-input");
 
+//Selecting profile picture element
+const profilePicture = document.querySelector(".profile__avatar");
+
+
 const profileFormElement = editModal.querySelector(".modal__form");
 
 function fillProfileInputs() {
@@ -121,9 +133,13 @@ function fillProfileInputs() {
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  profileNameElement.textContent = nameInput.value;
-  profileJobElement.textContent = jobInput.value;
-  closeModal(editModal);
+  api.editUserInfo(nameInput.value,jobInput.value)
+  .then(data => {
+    profileNameElement.textContent = data.name;
+    profileJobElement.textContent = data.about;
+    closeModal(editModal);
+  })
+  .catch(err => console.log(err));
 }
 
 /*-----------------------------------------------------------------------------------*/

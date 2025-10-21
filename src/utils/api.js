@@ -19,7 +19,7 @@ class Api {
   }
 
   getAppInfo() {
-    return Promise.all(this.getInitialCards())
+    return Promise.all([this.getInitialCards(), this.getUserInfo()])
   }
 
   getInitialCards(){
@@ -37,6 +37,41 @@ class Api {
       console.log(err)
     });
   }
+
+  getUserInfo(){
+    return fetch(this._baseURL+"/users/me", {headers: this._headers})
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    })
+    .then((data)=>{
+      return data
+    })
+    .catch(err =>{
+      console.log(err)
+    });
+  }
+
+  editUserInfo(name,about){
+    return fetch(this._baseURL+"/users/me", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about,
+      }),
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    })
+  }
+
 }
+
+
 
 export default Api
