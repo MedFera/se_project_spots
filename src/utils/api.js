@@ -70,8 +70,77 @@ class Api {
     })
   }
 
+  addNewCard(name, link){
+    return fetch(this._baseURL+"/cards", {
+        method: "POST",
+        headers: this._headers,
+        body: JSON.stringify({
+          name,
+          link,
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  editUserAvatar(link){
+    return fetch(this._baseURL+"/users/me/avatar", {
+        method: "PATCH",
+        headers: this._headers,
+        body: JSON.stringify({
+          avatar: link,
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  deleteCard(id){
+    return fetch(this._baseURL+"/cards/"+id, {
+        method: "DELETE",
+        headers: this._headers,
+        body: JSON.stringify({
+          id,
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  toggleLike(liked, id){
+    let method = null
+    if (liked){
+      method = "PUT"
+    }
+    else{
+      method = "DELETE"
+    }
+
+    return fetch(this._baseURL+"/cards/"+id+"/likes", {
+        method: method,
+        headers: this._headers,
+        
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+
 }
-
-
-
 export default Api
