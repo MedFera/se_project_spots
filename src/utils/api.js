@@ -12,6 +12,14 @@ PUT /cards/:cardId/likes – Like a card
 DELETE /cards/:cardId/likes – Dislike a card
 */
 
+function _checkResponse(res){
+     if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+  }
+
+
 class Api {
   constructor(options) {
     this._baseURL = options.baseURL;
@@ -24,12 +32,7 @@ class Api {
 
   getInitialCards(){
     return fetch(this._baseURL+"/cards", {headers: this._headers})
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    })
+    .then(res => _checkResponse(res))
     .then((data)=>{
       return data
     })
@@ -40,12 +43,7 @@ class Api {
 
   getUserInfo(){
     return fetch(this._baseURL+"/users/me", {headers: this._headers})
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    })
+    .then(res => _checkResponse(res))
     .then((data)=>{
       return data
     })
@@ -62,12 +60,7 @@ class Api {
         name,
         about,
       }),
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    })
+    }).then(res => _checkResponse(res))
   }
 
   addNewCard(name, link){
@@ -79,12 +72,7 @@ class Api {
           link,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    .then(res => _checkResponse(res));
   }
 
   editUserAvatar(link){
@@ -95,12 +83,7 @@ class Api {
           avatar: link,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    .then(res => _checkResponse(res));
   }
 
   deleteCard(id){
@@ -111,12 +94,7 @@ class Api {
           id,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    .then(res => _checkResponse(res));
   }
 
   toggleLike(liked, id){
@@ -133,12 +111,7 @@ class Api {
         headers: this._headers,
         
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    .then(res => _checkResponse(res));
   }
 
 

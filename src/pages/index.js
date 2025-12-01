@@ -1,4 +1,5 @@
-import { enableValidation, validationConfig, resetValidation, disableButton} from "../scripts/validation.js";
+import { validationConfig } from "../utils/constants.js";
+import { enableValidation, resetValidation, disableButton} from "../scripts/validation.js";
 import "./index.css";
 import Api from "../utils/api.js";
 
@@ -31,14 +32,7 @@ api.getAppInfo()
   console.log(err)
 });
 
-// const initialCards = [
-//   { name: "Val Thorens", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg" },
-//   { name: "Restaurant terrace", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg" },
-//   { name: "An outdoor cafe", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg" },
-//   { name: "A very long bridge, over the forest and through the trees", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg" },
-//   { name: "Tunnel with morning light", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg" },
-//   { name: "Mountain house", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg" }
-// ];
+
 
 //Build cards
 const cardsList = document.querySelector(".cards__list");
@@ -284,14 +278,15 @@ const editAvatarBtn = profileAvatar.querySelector(".profile__avatar-btn");
 const editAvatarModal = document.querySelector("#profile-avatar-modal");
 const editAvatarFormElement = editAvatarModal.querySelector(".modal__form");
 const editAvatarModalCloseBtn = editAvatarModal.querySelector(".modal__close");
-const editAvatarModalSubmitBtn = editAvatarBtn.querySelector(".modal__submit-btn");
+const editAvatarModalSubmitBtn = editAvatarModal.querySelector(".modal__submit-btn");
 
 function handleEditAvatarFormSubmit(evt){
   evt.preventDefault();
   const editAvatarFormInput = editAvatarFormElement.querySelector("#profile-avatar-input");
-  //console.log(editAvatarFormInput.value);
   editAvatarModalSubmitBtn.textContent = "Saving...";
-  api.editUserAvatar(editAvatarFormInput.value)
+  let link = editAvatarFormInput.value;
+
+  api.editUserAvatar(link)
   .then(obj =>{
     profilePicture.src = editAvatarFormInput.value;
     evt.target.reset();
@@ -299,7 +294,7 @@ function handleEditAvatarFormSubmit(evt){
     disableButton(editAvatarModalSubmitBtn, validationConfig);
     editAvatarModalSubmitBtn.textContent = "Save";
     closeModal(editAvatarModal);
-  })
+  }).catch(console.error);
 
   
 }
